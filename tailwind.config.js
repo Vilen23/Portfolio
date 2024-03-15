@@ -8,11 +8,29 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
+        'gradient-to': 'linear-gradient(to right, #FBB03B, #D4145A)',
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      gradientColorStops: theme => ({
+        'stop1': '#FBB03B',
+        'stop2': '#D4145A',
+      })
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities }) {
+      const newUtilities = {
+        '.border-gradient': {
+          border: 'double 1px transparent',
+          backgroundImage: 'linear-gradient(to right, #D4145A, #FBB03B)',
+          backgroundOrigin: 'border-box',
+          backgroundClip: 'content-box, border-box', 
+          boxDecorationBreak: 'clone'
+        },
+      }
+      addUtilities(newUtilities)
+    }
+  ],
 };
